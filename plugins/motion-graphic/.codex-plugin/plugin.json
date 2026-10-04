@@ -1,0 +1,20 @@
+{
+  "name": "motion-graphic",
+  "version": "1.0.0",
+  "description": "말로 하는 발표를 모션그래픽 슬라이드로 만들어 standalone 단일 HTML로 납품하는 스킬(motion-deck). 스타일 3종(무대·지면·색면과 도형), reveal.js + 무대 엔진, 헤드리스 Chrome 캡처 검사, 발표자 노트·타이밍표.",
+  "author": {
+    "name": "bigbulgogiburger"
+  },
+  "repository": "https://github.com/bigbulgogiburger/motion-graphic-codex",
+  "homepage": "https://github.com/bigbulgogiburger/motion-graphic-codex",
+  "keywords": [
+    "presentation",
+    "slides",
+    "motion-graphics",
+    "reveal.js",
+    "keynote",
+    "codex"
+  ],
+  "license": "MIT",
+  "skills": "./skills/"
+}

@@ -1,0 +1,62 @@
+/* ───────── 샘플 flow — 노선도 ─────────
+   노선 y818 · 정거장 이름 60px(지금 정거장 #333 굵게, 나머지 #666) · 주석: 누가 46px + 한 줄 60px · 꼬리표 44px */
+.b-s33 .s33-h {
+  position: absolute; left: 114px; top: 106px;
+  font-size: 116px; font-weight: 760; letter-spacing: -.03em; line-height: 1.1; color: var(--ink);
+}
+/* 10단계: 옛 제목은 0.2s 에 빠지고(엔진 기본 0.4s ease-in 이면 새 제목과 겹쳐 보인다) 결론이 조판된다 */
+.reveal .slides section.b-s33 .s33-h.gone { transition: opacity .2s var(--ease-in); }
+/* 결론(10단계): 150px 두 줄 — 제목과 노선 사이를 결론 문장이 채운다 */
+.b-s33 .s33-end {
+  position: absolute; left: 112px;
+  font-size: 150px; font-weight: 800; letter-spacing: -.035em; line-height: 1.1; color: var(--ink);
+}
+.b-s33 .s33-route { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.b-s33 .s33-route svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+.b-s33 .s33-ahead { fill: none; stroke: var(--rule); stroke-width: 8px; stroke-linecap: round; stroke-dasharray: .01 18; }
+/* 진행선 = 네이비 「절차 선」(절차·장치의 색) */
+.b-s33 .s33-prog {
+  position: absolute; height: 10px; background: var(--navy);
+  transform-origin: 0 50%; transition: transform .7s var(--ease-move);
+}
+.b-s33 .s33-term { position: absolute; top: 790px; width: 10px; height: 56px; background: var(--ink); }
+.b-s33 .s33-marks { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.b-s33 .s33-box {
+  position: absolute; top: 792px; width: 52px; height: 52px; box-sizing: border-box;
+  border: 5px solid var(--ink); background: #fff; transition: border-color .25s;
+}
+.b-s33 .s33-tick { position: absolute; top: 796px; width: 10px; height: 44px; background: var(--green); }
+.b-s33 .s33-dev { position: absolute; top: 784px; width: 16px; height: 68px; background: var(--navy); }
+.b-s33 .s33-nm { top: 870px; font-size: 60px; font-weight: 600; letter-spacing: -.01em; line-height: 1.2; color: var(--ink3); }
+.b-s33 .s33-nm span { transition: color .35s .3s, font-weight .35s .3s; }   /* 꼬리표가 닿을 무렵 굵어진다 */
+.b-s33[data-step="5"] .n5 span, .b-s33[data-step="9"] .n9 span { transition-delay: .6s; }   /* 승인 체크 뒤 출발(0.35s)만큼 더 늦게 */
+.b-s33 .s33-run { position: absolute; left: 0; top: 0; width: 0; height: 0; transition: transform .7s var(--ease-move); }
+.b-s33 .s33-run .pin { position: absolute; top: 726px; width: 3px; height: 92px; background: var(--ink); transition: height .2s linear; }
+.b-s33 .s33-run .dot { position: absolute; top: 807px; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); transition: opacity .2s linear; }
+.b-s33 .s33-run .tag {
+  position: absolute; top: 658px; height: 68px; padding: 0 26px; border-radius: 3px; transform: translateX(-50%);
+  background: var(--ink); color: #fff;
+  font-size: 44px; font-weight: 700; line-height: 68px; letter-spacing: -.01em;
+}
+.b-s33 .s33-lead { position: absolute; top: 540px; width: 3px; height: 108px; background: var(--ink); }
+.b-s33 .s33-note { position: absolute; top: 384px; }
+.b-s33 .s33-note.plain { top: 451px; }
+.b-s33 .s33-note.R { text-align: right; }
+.b-s33 .s33-note .who { display: block; margin-bottom: 11.8px; font-size: 46px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+.b-s33 .s33-note .who.w-ai { color: var(--green); }
+.b-s33 .s33-note .who.w-hu { color: var(--ink); }
+.b-s33 .s33-note .who.w-dev { color: var(--navy); }
+.b-s33 .s33-note .say { display: block; font-size: 60px; font-weight: 600; letter-spacing: -.01em; line-height: 1.2; color: var(--ink); }
+/* 지금 정거장 이름 */
+.b-s33[data-step="1"] .n1 span, .b-s33[data-step="2"] .n2 span, .b-s33[data-step="3"] .n3 span,
+.b-s33[data-step="4"] .n4 span, .b-s33[data-step="5"] .n5 span, .b-s33[data-step="6"] .n6 span,
+.b-s33[data-step="7"] .n7 span, .b-s33[data-step="8"] .n8 span, .b-s33[data-step="9"] .n9 span,
+.b-s33[data-step="10"] :is(.n1, .n4, .n8) span { color: var(--ink); font-weight: 760; }
+/* 승인 대기: 결재칸 테두리가 주황으로 바뀌고 한 번 숨 쉰 뒤 멈춘다(클릭 안에서 1.03s 에 끝남) */
+.b-s33[data-step="4"] .s33-box.g1,
+.b-s33[data-step="8"] .s33-box.g2 { border-color: var(--orange); transition: border-color .25s .4s; animation: b-wait .35s var(--ease-move) .68s 1; }
+@keyframes b-wait { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+/* 1단계는 티켓이 결재칸 위에 선다 — 칸이 곧 티켓 자리라 점을 감추고 핀은 칸 위에서 멈춘다(도착 직전에) */
+.b-s33[data-step="1"] .s33-run .pin { height: 62px; transition-delay: .5s; }
+.b-s33[data-step="1"] .s33-run .dot { opacity: 0; transition-delay: .5s; }
+

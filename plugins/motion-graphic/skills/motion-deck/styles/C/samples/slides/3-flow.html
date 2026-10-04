@@ -1,0 +1,36 @@
+<section data-sid="flow" data-steps="10" class="c-route">
+  <h2 class="q-title" data-until="0" data-split style="--delay:.05s; --dur:.55s; --stagger:60ms">문의 하나가 끝나기까지</h2>
+
+  <div class="q-track q-fade"></div>
+  <div class="q-prog q-fade"></div>
+
+  <div class="q-st" style="--x:200px"><i class="q-sh dia" data-fx="pop" style="--delay:.20s; --dur:.3s"></i><span class="q-lb" data-fx="fade" style="--delay:.20s; --dur:.3s">문의 접수</span></div>
+  <div class="q-st q-fade" style="--x:390px"><i class="q-sh dot" data-fx="pop" style="--delay:.23s; --dur:.3s"></i><span class="q-lb" data-fx="fade" style="--delay:.225s; --dur:.3s">분류</span></div>
+  <div class="q-st q-fade" style="--x:580px"><i class="q-sh dot" data-fx="pop" style="--delay:.26s; --dur:.3s"></i><span class="q-lb" data-fx="fade" style="--delay:.25s; --dur:.3s">초안</span></div>
+  <div class="q-st ap1" style="--x:770px"><i class="q-ring dia"></i><i class="q-sh dia big" data-fx="pop" style="--delay:.29s; --dur:.3s"></i>
+    <svg class="q-chk" width="120" height="120" viewBox="-60 -60 120 120" aria-hidden="true"><path pathLength="1" d="M-25 1 L-8 18 L25 -18"/></svg>
+    <span class="q-lb" data-fx="fade" style="--delay:.275s; --dur:.3s">승인</span></div>
+  <div class="q-st q-fade" style="--x:960px"><i class="q-sh dot" data-fx="pop" style="--delay:.32s; --dur:.3s"></i><span class="q-lb" data-fx="fade" style="--delay:.30s; --dur:.3s">처리</span></div>
+  <div class="q-st q-fade" style="--x:1150px"><i class="q-sh duo" data-fx="pop" style="--delay:.35s; --dur:.3s"><b></b><b></b></i><span class="q-lb" data-fx="fade" style="--delay:.325s; --dur:.3s">검토</span></div>
+  <div class="q-st q-fade" style="--x:1340px"><i class="q-bar"></i><i class="q-sh sq" data-fx="pop" style="--delay:.38s; --dur:.3s"></i><span class="q-lb" data-fx="fade" style="--delay:.35s; --dur:.3s">관문</span></div>
+  <div class="q-st ap2" style="--x:1530px"><i class="q-ring dia"></i><i class="q-sh dia big" data-fx="pop" style="--delay:.41s; --dur:.3s"></i>
+    <svg class="q-chk" width="120" height="120" viewBox="-60 -60 120 120" aria-hidden="true"><path pathLength="1" d="M-25 1 L-8 18 L25 -18"/></svg>
+    <span class="q-lb" data-fx="fade" style="--delay:.375s; --dur:.3s">승인</span></div>
+  <div class="q-st q-fade" style="--x:1720px"><i class="q-sh dot" data-fx="pop" style="--delay:.44s; --dur:.3s"></i><span class="q-lb" data-fx="fade" style="--delay:.40s; --dur:.3s">마감</span></div>
+
+  <div class="q-tk-pos q-fade"><div class="q-ticket" data-fx="drop" style="--delay:.25s; --dur:.45s"><span>환불 문의</span></div></div>
+
+  <div class="q-cap-pos" data-x="200"><p class="q-cap" data-at="1" data-until="1" data-fx="rise" style="--dur:.6s"><i class="mk mk-h"></i>고객이 문의를 한 건 남긴다</p></div>
+  <div class="q-cap-pos" data-x="390"><p class="q-cap" data-at="2" data-until="2" data-fx="rise" style="--dur:.6s"><i class="mk mk-a"></i>어떤 문의인지 AI<i class="kx"></i>가 먼저 나눈다</p></div>
+  <div class="q-cap-pos" data-x="580"><p class="q-cap" data-at="3" data-until="3" data-fx="rise" style="--dur:.6s"><i class="mk mk-a"></i>AI<i class="kx"></i>가 답변 초안을 쓴다</p></div>
+  <div class="q-cap-pos" data-x="770"><p class="q-cap" data-at="4" data-until="4" data-fx="rise" style="--dur:.6s"><i class="mk mk-h"></i>초안을 보고 상담원이 승인한다</p></div>
+  <div class="q-cap-pos" data-x="960"><p class="q-cap" data-at="5" data-until="5" data-fx="rise" style="--dur:.6s; --delay:.26s"><i class="mk mk-a"></i>AI<i class="kx"></i>가 환불을 접수한다</p></div>
+  <div class="q-cap-pos" data-x="1150"><p class="q-cap" data-at="6" data-until="6" data-fx="rise" style="--dur:.6s"><i class="mk mk-a2"></i>다른 AI<i class="kx"></i>가 한 번 더 본다</p></div>
+  <div class="q-cap-pos" data-x="1340"><p class="q-cap" data-at="7" data-until="7" data-fx="rise" style="--dur:.6s"><i class="mk mk-d"></i>자동 점검을 통과해야 넘어간다</p></div>
+  <div class="q-cap-pos" data-x="1530"><p class="q-cap" data-at="8" data-until="8" data-fx="rise" style="--dur:.6s"><i class="mk mk-h"></i>결과를 보고 상담원이 승인한다</p></div>
+  <div class="q-cap-pos" data-x="1720"><p class="q-cap" data-at="9" data-until="9" data-fx="rise" style="--dur:.6s; --delay:.26s"><i class="mk mk-a"></i>답을 보내고 기록을 남긴다</p></div>
+
+  <p class="q-sum" data-at="10" data-split style="--delay:.2s; --dur:.75s; --stagger:60ms">결정할 때만 사람이 본다</p>
+  <aside class="notes">(스타일 샘플 — 가상 발표) 문의 한 건이 처음부터 끝까지 어떻게 흘러가는지 보시죠. 배송이 늦어 환불을 묻는 문의입니다. AI가 먼저 어떤 문의인지 나누고, 답변 초안을 씁니다. 여기서 멈춥니다. 상담원이 초안을 보고 승인해야 처리로 넘어갑니다. 처리가 끝나면 다른 AI가 다시 보고, 자동 점검이라는 관문을 통과해야 합니다. 마지막으로 상담원이 결과를 보고 승인하면 답을 보내고 기록을 남깁니다. (마지막 클릭) 사람이 손대는 곳은 결정하는 세 군데뿐입니다.</aside>
+</section>
+

@@ -1,0 +1,117 @@
+/* stage.css — 세 방향(A/B/C)이 공유하는 무대 기반.
+   리셋 · 스텝 상태 · 키네틱 타이포(단어 마스크) · 등장 효과 · 레이아웃 FLIP · 펜 · 매치컷 · 일시정지.
+   색·서체 크기·구도는 각 방향의 theme.css 가 정한다. 이 파일에는 색을 넣지 않는다. */
+
+:root {
+  --ease-out: cubic-bezier(.16, 1, .3, 1);      /* 등장: 빠르게 나와 길게 멈춘다 */
+  --ease-move: cubic-bezier(.65, 0, .35, 1);    /* 이동·카메라: 대칭 가감속 */
+  --ease-in: cubic-bezier(.7, 0, .84, 0);       /* 퇴장 */
+  --ease-pen: cubic-bezier(.55, .08, .35, 1);   /* 펜: 천천히 대고 빠르게 긋고 멈춘다 */
+  --ease-spring: cubic-bezier(.34, 1.45, .64, 1);  /* 오버슈트 — 벤치마크 규칙 8: 덱에서는 쓰지 않는다(호환용) */
+}
+
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--page, #fff); }
+
+.reveal {
+  font-family: 'Pretendard', 'Malgun Gothic', system-ui, sans-serif;
+  color: var(--fg, #111);
+  font-synthesis: none;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.reveal .slides { text-align: left; }
+.reveal .slides > section {
+  width: 1920px; height: 1080px; padding: 0 !important; top: 0 !important;
+  word-break: keep-all; overflow-wrap: break-word; line-break: strict;
+}
+/* 리셋은 :where() 로 우선순위 0 — 테마의 클래스 한 개가 언제나 이긴다 */
+:where(.reveal .slides section) * { box-sizing: border-box; }
+:where(.reveal .slides section) :where(h1, h2, h3, h4, p, ul, ol, li, figure, blockquote) {
+  margin: 0; padding: 0; font: inherit; letter-spacing: inherit; text-transform: none; text-shadow: none; list-style: none;
+}
+:where(.reveal .slides section) svg { overflow: visible; }
+
+/* ── 스텝: 엔진이 넣는 보이지 않는 fragment ── */
+.reveal .slides section .stage-step { display: none !important; }
+
+/* 진입·후진 때 상태 전환을 즉시 적용 */
+.reveal .slides section.instant,
+.reveal .slides section.instant * { transition: none !important; }
+.reveal .slides section.noanim *,
+.reveal .slides section.noanim *::before,
+.reveal .slides section.noanim *::after { animation-duration: 1ms !important; animation-delay: 0s !important; }
+
+/* data-at="n": n 스텝부터 보임(.on), data-until="n": n 스텝까지 보이고 그 뒤 사라짐(.gone), .now: 정확히 n 스텝 */
+.reveal .slides section [data-at]:not(.on) { opacity: 0 !important; visibility: hidden; }
+.reveal .slides section .gone { opacity: 0 !important; transition: opacity .4s var(--ease-in); pointer-events: none; }
+
+/* ── 키네틱 타이포: data-split → 단어마다 마스크 안에서 떠오름 ── */
+.reveal .w { display: inline-block; vertical-align: top; overflow: hidden; padding: .08em .04em .2em; margin: -.08em -.04em -.2em; }
+.reveal .wi { display: inline-block; }
+.reveal .slides section.present [data-split]:not([data-at]) .wi,
+.reveal .slides section [data-split][data-at].on .wi {
+  animation: st-word var(--dur, .95s) var(--ease-out) both;
+  animation-delay: calc(var(--delay, 0s) + var(--i, 0) * var(--stagger, 70ms));
+}
+@keyframes st-word { from { transform: translateY(112%); } }
+
+/* ── 등장 효과: data-fx (슬라이드 진입 시, 또는 data-at 스텝에) ── */
+.reveal .slides section.present [data-fx]:not([data-at]),
+.reveal .slides section [data-fx][data-at].on {
+  animation-name: var(--fx);
+  animation-duration: var(--dur, .9s);
+  animation-timing-function: var(--fx-ease, var(--ease-out));
+  animation-delay: var(--delay, 0s);
+  animation-fill-mode: both;
+}
+[data-fx="fade"]   { --fx: st-fade; }
+[data-fx="rise"]   { --fx: st-rise; }
+[data-fx="drop"]   { --fx: st-drop; }
+[data-fx="wipe"]   { --fx: st-wipe; --fx-ease: var(--ease-move); }
+[data-fx="wipe-up"]{ --fx: st-wipe-up; --fx-ease: var(--ease-move); }
+[data-fx="pop"]    { --fx: st-pop; --fx-ease: var(--ease-out); }   /* 튕김 없음(규칙 8) */
+[data-fx="grow-x"] { --fx: st-grow-x; --fx-ease: var(--ease-move); transform-origin: 0 50%; }
+[data-fx="grow-y"] { --fx: st-grow-y; --fx-ease: var(--ease-move); transform-origin: 50% 100%; }
+[data-fx="draw"]   { --fx: st-draw; --fx-ease: var(--ease-pen); stroke-dasharray: 1 1; }
+@keyframes st-fade   { from { opacity: 0; } }
+@keyframes st-rise   { from { opacity: 0; transform: translateY(48px); } }
+@keyframes st-drop   { from { opacity: 0; transform: translateY(-48px); } }
+@keyframes st-wipe   { from { clip-path: inset(-10% 100% -10% -2%); } to { clip-path: inset(-10% -2% -10% -2%); } }
+@keyframes st-wipe-up{ from { clip-path: inset(100% -2% -10% -2%); } to { clip-path: inset(-10% -2% -10% -2%); } }
+@keyframes st-pop    { from { opacity: 0; transform: scale(.4); } }
+@keyframes st-grow-x { from { transform: scaleX(0); } }
+@keyframes st-grow-y { from { transform: scaleY(0); } }
+@keyframes st-draw   { 0% { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 1; } }
+
+/* ── 레이아웃 FLIP: .flip 안의 <template> 들이 상태(레이아웃)이고 같은 data-k 는 같은 오브젝트 ── */
+.flip { position: absolute; }
+.flip > template { display: none; }
+.flip-stage { position: relative; }
+.flip-stage [data-k] { display: inline-block; transform-origin: 0 0; }
+.flip-stage .pen { display: none; }
+.flip-ghosts { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; }
+.flip-ghosts > * { position: absolute !important; display: inline-block; transform-origin: 0 0; white-space: nowrap; }
+.pen-layer { position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: visible; pointer-events: none; }
+.pen-layer path, svg.pen-svg path {
+  fill: none; stroke: var(--pen, #E36007); stroke-width: var(--pen-w, 10px);
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ── 매치컷: 도형이 화면을 덮었다가 다음 장의 요소로 줄어든다 ── */
+.mc-layer { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 60; }
+.mc-layer > div { position: absolute; transform-origin: 50% 50%; }
+.reveal .slides > section.mc-hold { display: block !important; visibility: visible !important; opacity: 1 !important; transform: none !important; z-index: 12 !important; }
+.reveal .slides > section.mc-wait { visibility: hidden !important; }
+.reveal .slides > section.mc-wait *,
+.reveal .slides > section.mc-wait *::before,
+.reveal .slides > section.mc-wait *::after { animation-play-state: paused !important; }
+
+/* ── P: 일시정지(모든 CSS 애니메이션 정지 — WAAPI 는 엔진이 멈춘다) ── */
+html.is-paused *, html.is-paused *::before, html.is-paused *::after { animation-play-state: paused !important; }
+
+/* ── 모션 줄이기 ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-delay: 0s !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+}
+html.static *, html.static *::before, html.static *::after { animation-duration: 1ms !important; animation-delay: 0s !important; transition-duration: 1ms !important; transition-delay: 0s !important; }

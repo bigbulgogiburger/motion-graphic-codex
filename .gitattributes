@@ -1,0 +1,8 @@
+# 텍스트는 LF 로 정규화(Windows 체크아웃 포함) — 스크립트가 CRLF 로 깨지지 않게
+* text=auto eol=lf
+*.mjs text eol=lf
+*.js text eol=lf
+# 바이너리는 변환하지 않는다
+*.png binary
+*.jpg binary
+*.woff2 binary

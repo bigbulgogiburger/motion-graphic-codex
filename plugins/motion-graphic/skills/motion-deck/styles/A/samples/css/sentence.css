@@ -1,0 +1,14 @@
+/* 샘플 sentence — 큰 문장: 주어 자리바꿈(같은 낱말이 같은 노드로 이동) → 앞줄은 꺼진 조명, 동사가 쌓인다 */
+.a-roles .r-blk {
+  left: 160px;
+  font-size: 180px; font-weight: 820; letter-spacing: -.035em; line-height: 1.12;
+}
+.a-roles .kb { margin-left: .02em; }   /* 「AI가」 라틴·한글 경계 보정 */
+.a-roles .r-2 { top: 330px; }
+.a-roles .r-4 { top: 128px; }
+.a-roles .r-l { display: block; }
+.a-roles .r-g { display: grid; grid-template-columns: max-content max-content; column-gap: .2em; }
+.a-roles .r-verbs { display: flex; flex-direction: column; align-items: flex-start; }
+.a-roles .r-mute { color: var(--mute); }
+.a-roles .r-off { opacity: var(--off); }
+.a-roles .r-front { position: relative; z-index: 3; }   /* 자리바꿈 때 AI 가 앞, 사람은 뒤(어둠)로 지나간다 */

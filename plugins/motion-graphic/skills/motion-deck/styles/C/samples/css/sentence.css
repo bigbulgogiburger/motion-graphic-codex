@@ -1,0 +1,31 @@
+/* 샘플 sentence — 배우가 역할을 바꾼다(자막 마지막 줄 기준선 = 작업 막대 윗면, 바닥선 y 660) */
+.c-roles .r-cap { left: 114px; top: 400px; font-size: 124px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; white-space: nowrap; }
+.c-roles .r-bar { position: absolute; left: 980px; top: 660px; width: 820px; height: 24px; border-radius: 12px; background: var(--ink); }
+/* ● AI: 240px 원을 바닥 가운데 기준으로 줄여 쓴다 */
+.c-roles .r-ai { left: 1347px; top: 420px; width: 240px; height: 240px; transform-origin: 50% 100%; transform: translateX(-77px) scale(.3); transition: transform .85s var(--e-move); }
+.c-roles.st-1 .r-ai { transform: none; }
+/* ◆ 사람: x·y·크기를 따로 움직여 호를 그린다 */
+.c-roles .r-hx { position: absolute; left: 0; top: 0; transform: translateX(var(--x)); transition: transform .85s cubic-bezier(.55, 0, .35, 1), opacity .3s; }
+.c-roles .r-hy { transform: translateY(var(--y)); transition: transform .85s cubic-bezier(.2, .8, .35, 1); }
+.c-roles .r-hs { position: absolute; left: -77.78px; top: -77.78px; width: 155.56px; height: 155.56px; transform: scale(var(--s)); transition: transform .85s var(--e-move); }
+.c-roles .h1 { --x: 1200px; --y: 550px; --s: 1; }
+.c-roles .h2, .c-roles .h3 { --x: 1467px; --y: 382px; --s: .3455; opacity: 0; }
+.c-roles.st-1 .h1 { --x: 1467px; --y: 382px; --s: .3455; }
+.c-roles.st-2 .h1 { --x: 980px;  --y: 672px; }
+.c-roles.st-2 .h2 { --x: 1272px; --y: 672px; opacity: 1; }
+.c-roles.st-2 .h3 { --x: 1662px; --y: 672px; opacity: 1; }
+.c-roles.st-2 .r-hx { transition: transform .7s cubic-bezier(.3, .6, .3, 1), opacity .2s; }
+.c-roles.st-2 .r-hy { transition: transform .7s cubic-bezier(.6, 0, .8, .35); }
+.c-roles.st-2 .h2, .c-roles.st-2 .h2 .r-hy { transition-delay: .05s; }
+.c-roles.st-2 .h3, .c-roles.st-2 .h3 .r-hy { transition-delay: .1s; }
+/* 이름표: 도형을 따라다닌다(가운데 맞춤 상자) */
+.c-roles .r-tag { position: absolute; left: 0; top: 0; width: 200px; margin-left: -100px; text-align: center; font-size: 52px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; white-space: nowrap;
+  transition: transform .85s var(--e-move), opacity .3s; }
+.c-roles .tag-h0 { transform: translate(1200px, 708px); }
+.c-roles .tag-h1 { transform: translate(1590px, 350px); }
+.c-roles .tag-ai { transform: translate(1390px, 708px); }
+.c-roles.st-1 .tag-ai { transform: translate(1467px, 708px); }
+.c-roles.st-2 .r-tag { opacity: 0; }
+.c-roles .r-verb { position: absolute; top: 726px; width: 280px; margin-left: -140px; text-align: center; font-size: 52px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; white-space: nowrap; }
+.c-roles .v1 { left: 980px; } .c-roles .v2 { left: 1272px; } .c-roles .v3 { left: 1662px; }
+

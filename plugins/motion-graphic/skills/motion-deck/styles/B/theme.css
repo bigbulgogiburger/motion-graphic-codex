@@ -1,0 +1,26 @@
+/* 스타일 B 「지면」 공통 — 흰 지면 · 스위스 그리드 · 주황 펜. 장별 스타일은 css/<sid>.css(선택자는 그 장의 클래스 .b-…). 규칙은 DESIGN.md.
+   잉크 #333(제목·본문·선) · 보조 #666 · 구조선 #A4A3A4 · 사람(주인공) = 주황 펜(선으로만) · AI = 초록(조판 글자·에이전트) · 장치 = 네이비(절차 선·관문)
+   그리드: 1920×1080, 좌우 여백 120, 12단(118+24). 단 왼쪽 x = 120 262 404 546 688 830 972 1114 1256 1398 1540 1682
+   자간: 디스플레이 −0.03em(250px 이상은 −0.035em), 라틴→한글 경계는 마지막 라틴 글자에 .lk 로 +0.015~0.02em 보정. 48px 이하 −0.01em. */
+
+:root {
+  --ink: #333333; --ink3: #666666; --rule: #A4A3A4;
+  --green: #00854A; --navy: #002060; --orange: #E36007;
+  --pen: #E36007; --pen-w: 10px;
+}
+body.dir-b { background: #ffffff; }
+.dir-b .reveal { color: var(--ink); }
+.dir-b .reveal .slides section p,
+.dir-b .reveal .slides section h1,
+.dir-b .reveal .slides section h2 { margin: 0; white-space: nowrap; }
+
+/* 오른쪽→왼쪽 와이프(오른쪽 정렬 주석이 주석선에서 풀려나온다) */
+[data-fx="wipe-l"] { --fx: b-wipe-l; --fx-ease: var(--ease-move); }
+@keyframes b-wipe-l { from { clip-path: inset(-10% -2% -10% 100%); } to { clip-path: inset(-10% -2% -10% -2%); } }
+
+/* 공용 */
+.b-full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; pointer-events: none; }
+.c0 { position: absolute; width: 0; }
+.c0 > span { display: inline-block; transform: translateX(-50%); }
+.b-num { font-variant-numeric: tabular-nums; }
+

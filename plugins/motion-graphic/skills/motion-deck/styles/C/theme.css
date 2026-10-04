@@ -1,0 +1,46 @@
+/* 스타일 C 「색면과 도형」 공통 — 장별 스타일은 css/<sid>.css(선택자는 그 장의 클래스 .c-…). 규칙은 DESIGN.md.
+   ◆ 사람(주인공) = 주황(도형으로만, 주황 글자 금지) · ● AI = DB 초록 · ■ 장치 = 네이비 · 물건(일·프로젝트·티켓) = 잉크(#333)/흰 면.
+   글자는 자막(잉크), 도형이 연기한다. 장 사이 컷은 theme.js 의 Deck.cut(색면 덮기 · 공유 요소). 그라데이션·그림자·글로우 없음.
+   움직임은 튕기지 않는다: 등장 = 감속, 퇴장 = 가속, 이동 = 대칭 가감속. 선 굵기 체계 = 선 14px · 막대 28px. */
+
+.dir-c {
+  --paper: #ffffff; --ink: #333333; --ink3: #666666; --mute: #A4A3A4;
+  --human: #E36007; --ai: #00854A; --ai2: #3BA096; --device: #002060;
+  --pen: #333333;
+  --e-in: cubic-bezier(.2, .7, .2, 1);       /* 등장(감속) */
+  --e-move: cubic-bezier(.65, 0, .35, 1);    /* 이동·카메라(대칭) */
+  --e-exit: cubic-bezier(.7, 0, .84, 0);     /* 퇴장(가속) */
+}
+.dir-c .reveal { color: var(--ink); }
+.dir-c .reveal .slides > section { font-size: 40px; line-height: 1.4; text-wrap: balance; }
+
+/* ── 도형 어휘(덱 전체 고정) ── */
+.dir-c .dia { display: block; position: absolute; background: var(--human); rotate: 45deg; }
+.dir-c .dot { display: block; position: absolute; border-radius: 50%; background: var(--ai); }
+.dir-c .sq  { display: block; position: absolute; background: var(--device); }
+/* 라틴 → 한글 경계(「Inbox에서」「AI가」) +0.015em — 글자 없는 빈 틈 */
+.dir-c .kx { display: inline-block; width: .015em; }
+/* 자막 앞 화자 도형(축소판) */
+.dir-c .mk { display: inline-block; width: .5em; height: .5em; margin-right: .36em; vertical-align: .06em; }
+.dir-c .mk-h { width: .4em; height: .4em; margin: 0 .42em 0 .06em; vertical-align: .12em; background: var(--human); rotate: 45deg; }
+.dir-c .mk-a { border-radius: 50%; background: var(--ai); }
+.dir-c .mk-a2 { border-radius: 50%; background: var(--ai2); }
+.dir-c .mk-d { width: .44em; height: .44em; vertical-align: .09em; background: var(--device); }
+
+/* ── 방향 C 전용 등장 효과(data-fx) — 감속으로 도착, 지나쳤다 돌아오지 않는다 ── */
+.dir-c [data-fx="c-slide-l"] { --fx: c-slide-l; --fx-ease: cubic-bezier(.2, .8, .2, 1); }
+.dir-c [data-fx="c-slide-d"] { --fx: c-slide-d; --fx-ease: cubic-bezier(.2, .8, .2, 1); }
+.dir-c [data-fx="c-reach"]   { --fx: c-reach;   --fx-ease: cubic-bezier(.25, .9, .3, 1); transform-origin: 0 50%; }
+.dir-c [data-fx="c-grip"]    { --fx: c-grip;    --fx-ease: linear; }
+@keyframes c-slide-l { from { transform: translateX(-320px); opacity: 0; } }
+@keyframes c-slide-d { from { transform: translateY(-240px); opacity: 0; } }
+@keyframes c-reach   { from { transform: scaleX(0); } }
+@keyframes c-grip {   /* 팔이 다 뻗을 때까지 기다렸다가 창이 잡힌다 */
+  0%, 45% { transform: translateX(-200px) scale(.15); opacity: 0; animation-timing-function: cubic-bezier(.2, .8, .2, 1); }
+  100% { transform: none; opacity: 1; }
+}
+
+
+/* ═════════════ 장 사이 컷 레이어(theme.js CUTS) — 화면 좌표, 슬라이드 위 ═════════════ */
+.dir-c .c-cut-layer { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 60; }
+.dir-c .c-cut-layer > div { position: absolute; }

@@ -1,0 +1,14 @@
+/* 샘플 title — 마침표(작은 초록 점)가 굴러 나가 큰 ● 가 되고, ◆ 가 그 위에 앉는다(진입 자동 연출 ≈ 3.0s) */
+.c-title .t-event { position: absolute; left: 128px; top: 104px; display: flex; gap: 30px; font-size: 36px; line-height: 1.2; letter-spacing: -.005em; white-space: nowrap; }
+.c-title .t-event b { font-weight: 700; }
+.c-title .t-event span { font-weight: 500; color: var(--ink3); }
+.c-title .t-title { position: absolute; left: 116px; top: 258px; font-size: 176px; font-weight: 800; letter-spacing: -.035em; line-height: 1.1; white-space: nowrap; }
+.c-title .t-title > span { display: block; }
+.c-title .t-anchor { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+.c-title .t-sub { position: absolute; left: 128px; top: 702px; font-size: 58px; font-weight: 600; letter-spacing: -.015em; line-height: 1.2; color: var(--ink); white-space: nowrap; }
+.c-title .t-by { position: absolute; left: 128px; top: 878px; display: flex; flex-direction: column; gap: 4px; font-size: 38px; line-height: 1.3; letter-spacing: -.005em; white-space: nowrap; }
+.c-title .t-by b { font-weight: 700; }
+.c-title .t-by span { font-weight: 500; color: var(--ink3); font-variant-numeric: tabular-nums; }
+.c-title .t-agent { left: 1220px; top: 180px; width: 860px; height: 860px; transform-origin: 50% 50%; }
+.c-title .t-human { left: 1525px; top: 107px; width: 68px; height: 68px; }
+

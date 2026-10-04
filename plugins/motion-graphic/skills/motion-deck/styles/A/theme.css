@@ -1,0 +1,18 @@
+/* 스타일 A 「무대」 공통 — 장별 스타일은 css/<sid>.css 에 두고 선택자는 그 장의 클래스(.a-…)로 묶는다. 규칙은 DESIGN.md.
+   검정 무대, 빛은 하나. 밝기(불투명도)가 초점이고, 큰 글자와 카메라가 이야기를 끈다.
+   색: 흰 글자 · 회색 #A4A3A4 · 사람(주인공) = 주황 #E36007(글자 가능 5.9:1) · AI·진행 = 초록 #00854A(면·선으로만) · 장치 = 흰 선/회색.
+   그라데이션·그림자·글로우·블러 없음. 튕김(오버슈트) 없음 — 등장은 감속(--ease-out), 이동은 대칭 가감속(--ease-move). */
+
+.dir-a {
+  --fg: #fff; --mute: #A4A3A4; --hu: #E36007; --ai: #00854A; --line: #666666; --dark: #333333;
+  --dim: #666666;                     /* 지나간 부품(꺼진 조명) */
+  --off: .28;                         /* 꺼진 조명(글자) */
+}
+body.dir-a, .dir-a .reveal { background: #000; color: #fff; }
+.dir-a .reveal .slides > section { color: #fff; }
+.dir-a .hu { color: var(--hu); }
+
+/* 공통: FLIP 상자는 화면 전체 — 안쪽은 전부 절대 좌표 */
+.dir-a .flip { left: 0; top: 0; width: 1920px; height: 1080px; }
+.dir-a .flip-stage > * { position: absolute; white-space: nowrap; }
+

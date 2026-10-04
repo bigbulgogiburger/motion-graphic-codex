@@ -1,0 +1,7 @@
+# 로컬 개발 부산물
+node_modules/
+*.local
+*.local.json
+evals/**/outputs/
+evals/**/workspace/
+__pycache__/

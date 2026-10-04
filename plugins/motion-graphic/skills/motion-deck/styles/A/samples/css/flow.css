@@ -1,0 +1,116 @@
+/* ───────── 샘플 flow — 문의 하나가 끝나기까지: 카메라가 깃발(티켓)을 따라간다 ─────────
+   월드: 정거장 간격 640, 선 y=0. 확대(1~9) 배율 1 · 깃발은 화면 x=860 에 머물고 세계가 흐른다.
+   전체(0·10) 배율 .33 — 경로 1690px(화면 폭 88%), 정거장 이름 실효 42px(사람 지점은 결론에서 49px).
+   SVG 카메라와 글자 카메라는 같은 transform·같은 곡선 — 지나온 초록 선의 머리는 깃발 밑에 붙어 있다.
+   클릭당 연출 ≤ 1.2s: 카메라 .95s(승인 통과 스텝은 ◆ 채움 .3s 뒤 .85s). */
+.a-flow .f-svg { position: absolute; left: 0; top: 0; overflow: visible; }
+.a-flow .f-cam { transform-origin: 0 0; transform-box: view-box; transition: transform .95s var(--ease-move); }
+.a-flow .f-text { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+section.a-flow[data-step="0"] .f-cam { transform: translate(115px, 720px) scale(.33); }
+section.a-flow[data-step="1"] .f-cam { transform: translate(860px, 460px) scale(1); }
+section.a-flow[data-step="2"] .f-cam { transform: translate(220px, 460px) scale(1); }
+section.a-flow[data-step="3"] .f-cam { transform: translate(-420px, 460px) scale(1); }
+section.a-flow[data-step="4"] .f-cam { transform: translate(-890px, 460px) scale(1); }
+section.a-flow[data-step="5"] .f-cam { transform: translate(-1700px, 460px) scale(1); transition-duration: .85s; transition-delay: .3s; }
+section.a-flow[data-step="6"] .f-cam { transform: translate(-2340px, 460px) scale(1); }
+section.a-flow[data-step="7"] .f-cam { transform: translate(-2980px, 460px) scale(1); }
+section.a-flow[data-step="8"] .f-cam { transform: translate(-3450px, 460px) scale(1); }
+section.a-flow[data-step="9"] .f-cam { transform: translate(-4260px, 460px) scale(1); transition-duration: .85s; transition-delay: .3s; }
+section.a-flow[data-step="10"] .f-cam { transform: translate(115px, 720px) scale(.33); }
+.a-flow .f-base { stroke: var(--line); stroke-width: 5px; stroke-dasharray: 16 18; transition: stroke-width .95s var(--ease-move), opacity .5s; }
+.a-flow .f-prog { stroke: var(--ai); stroke-width: 9px; stroke-dasharray: 1 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset .95s var(--ease-move), stroke-width .95s var(--ease-move), opacity .5s; }
+section.a-flow[data-step="0"] .f-prog { stroke-dashoffset: 1.0000; }
+section.a-flow[data-step="1"] .f-prog { stroke-dashoffset: 1.0000; }
+section.a-flow[data-step="2"] .f-prog { stroke-dashoffset: 0.8750; }
+section.a-flow[data-step="3"] .f-prog { stroke-dashoffset: 0.7500; }
+section.a-flow[data-step="4"] .f-prog { stroke-dashoffset: 0.6582; }
+section.a-flow[data-step="5"] .f-prog { stroke-dashoffset: 0.5000; transition-duration: .85s; transition-delay: .3s; }
+section.a-flow[data-step="6"] .f-prog { stroke-dashoffset: 0.3750; }
+section.a-flow[data-step="7"] .f-prog { stroke-dashoffset: 0.2500; }
+section.a-flow[data-step="8"] .f-prog { stroke-dashoffset: 0.1582; }
+section.a-flow[data-step="9"] .f-prog { stroke-dashoffset: 0.0000; transition-duration: .85s; transition-delay: .3s; }
+section.a-flow[data-step="10"] .f-prog { stroke-dashoffset: 0.0000; }
+section.a-flow[data-step="0"] .f-base, section.a-flow[data-step="10"] .f-base { stroke-width: 10px; stroke-dasharray: 22 26; }
+section.a-flow[data-step="0"] .f-prog, section.a-flow[data-step="10"] .f-prog { stroke-width: 20px; }
+.a-flow .nd { fill: #000; stroke: var(--line); stroke-width: 4px; transform-box: fill-box; transform-origin: center;
+  transition: fill .3s var(--ease-out) .75s, stroke .3s var(--ease-out) .75s, stroke-width .95s var(--ease-move), transform .95s var(--ease-move), opacity .5s; }
+.a-flow .nd.hd, .a-flow .nd.dm { stroke: var(--hu); }
+/* 전체 보기: 정거장 기호를 1.6배로(실효 지름 ≈ 27px) */
+section.a-flow[data-step="0"] .nd, section.a-flow[data-step="10"] .nd { stroke-width: 7px; transform: scale(1.6); }
+.a-flow.st-1 .n0 { fill: var(--hu); stroke: var(--hu); }
+.a-flow.st-2 .n1 { fill: var(--ai); stroke: var(--ai); }
+.a-flow.st-3 .n2 { fill: var(--ai); stroke: var(--ai); }
+.a-flow.st-5 .n3 { fill: var(--hu); stroke: var(--hu); transition-delay: 0s; }
+.a-flow.st-5 .n4 { fill: var(--ai); stroke: var(--ai); transition-delay: .85s; }
+.a-flow.st-6 .n5 { fill: var(--ai); stroke: var(--ai); }
+.a-flow.st-7 .n6 { fill: #fff; stroke: #fff; }
+.a-flow.st-9 .n7 { fill: var(--hu); stroke: var(--hu); transition-delay: 0s; }
+.a-flow.st-9 .n8 { fill: var(--ai); stroke: var(--ai); transition-delay: .85s; }
+/* 승인 대기: 카메라가 ◆ 앞에 서는 동안 맥박 한 번(.65s 에 시작해 1.15s 에 끝) */
+section.a-flow[data-step="4"] .n3, section.a-flow[data-step="8"] .n7 { animation: f-wait .5s var(--ease-move) .65s 1; }
+@keyframes f-wait { 50% { transform: scale(1.3); } }
+.a-flow .ck { fill: none; stroke: #000; stroke-width: 7px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset .3s var(--ease-pen) .05s; }
+.a-flow.st-5 .ck3, .a-flow.st-9 .ck7 { stroke-dashoffset: 0; }
+.a-flow .f-st { position: absolute; top: 0; white-space: nowrap; }
+.a-flow .f-st > p { position: absolute; left: 0; }
+.a-flow .who { top: 62px; font-size: 46px; font-weight: 650; letter-spacing: -.005em; line-height: 1.1; color: #fff; }
+.a-flow .who.hu { color: var(--hu); }
+.a-flow .who.dv { color: var(--mute); }
+.a-flow .nm { top: 112px; font-size: 128px; font-weight: 820; letter-spacing: -.03em; line-height: 1.1; color: #fff; opacity: 0;
+  transform-origin: 0 0; }
+.a-flow .desc { top: 278px; font-size: 56px; font-weight: 550; letter-spacing: -.01em; line-height: 1.3; color: var(--mute); }
+.a-flow .who, .a-flow .desc { opacity: 0; transition: opacity .3s var(--ease-in); }
+.a-flow .nm { transition: opacity .5s var(--ease-out), color .5s var(--ease-out), transform .5s var(--ease-out); }
+section.a-flow[data-step="0"] .nm { opacity: 1; color: var(--mute); }
+/* 확대 중에는 지금 정거장(밝음)과 바로 앞뒤(꺼진 조명)만 보인다 */
+section.a-flow[data-step="1"] .s1 .nm,
+section.a-flow[data-step="2"] .s0 .nm,
+section.a-flow[data-step="2"] .s2 .nm,
+section.a-flow[data-step="3"] .s1 .nm,
+section.a-flow[data-step="3"] .s3 .nm,
+section.a-flow[data-step="4"] .s2 .nm,
+section.a-flow[data-step="4"] .s4 .nm,
+section.a-flow[data-step="5"] .s3 .nm,
+section.a-flow[data-step="5"] .s5 .nm,
+section.a-flow[data-step="6"] .s4 .nm,
+section.a-flow[data-step="6"] .s6 .nm,
+section.a-flow[data-step="7"] .s5 .nm,
+section.a-flow[data-step="7"] .s7 .nm,
+section.a-flow[data-step="8"] .s6 .nm,
+section.a-flow[data-step="8"] .s8 .nm,
+section.a-flow[data-step="9"] .s7 .nm { opacity: var(--off); transition-delay: .3s; }
+section.a-flow[data-step="10"] .nm { opacity: var(--off); }
+section.a-flow[data-step="1"] .s0 .nm, section.a-flow[data-step="2"] .s1 .nm, section.a-flow[data-step="3"] .s2 .nm,
+section.a-flow[data-step="4"] .s3 .nm, section.a-flow[data-step="6"] .s5 .nm, section.a-flow[data-step="7"] .s6 .nm,
+section.a-flow[data-step="8"] .s7 .nm { opacity: 1; transition-delay: .45s; }
+section.a-flow[data-step="1"] .s0 .who, section.a-flow[data-step="1"] .s0 .desc,
+section.a-flow[data-step="2"] .s1 .who, section.a-flow[data-step="2"] .s1 .desc,
+section.a-flow[data-step="3"] .s2 .who, section.a-flow[data-step="3"] .s2 .desc,
+section.a-flow[data-step="4"] .s3 .who, section.a-flow[data-step="4"] .s3 .desc,
+section.a-flow[data-step="6"] .s5 .who, section.a-flow[data-step="6"] .s5 .desc,
+section.a-flow[data-step="7"] .s6 .who, section.a-flow[data-step="7"] .s6 .desc,
+section.a-flow[data-step="8"] .s7 .who, section.a-flow[data-step="8"] .s7 .desc { opacity: 1; transition: opacity .5s var(--ease-out) .5s; }
+/* 승인 통과 스텝(5·9): 카메라가 .3s 늦게 떠나므로 글자도 그만큼 늦게 */
+section.a-flow[data-step="5"] .s4 .nm, section.a-flow[data-step="9"] .s8 .nm { opacity: 1; transition-delay: .65s; }
+section.a-flow[data-step="5"] .s4 .who, section.a-flow[data-step="5"] .s4 .desc,
+section.a-flow[data-step="9"] .s8 .who, section.a-flow[data-step="9"] .s8 .desc { opacity: 1; transition: opacity .45s var(--ease-out) .7s; }
+/* 결론(10): 사람 지점 세 곳만 켜진다 — 주황, 1.17배(실효 49px) */
+section.a-flow[data-step="10"] .s0 .nm, section.a-flow[data-step="10"] .s3 .nm, section.a-flow[data-step="10"] .s7 .nm {
+  opacity: 1; color: var(--hu); transform: scale(1.17); transition-delay: .6s; }
+section.a-flow[data-step="10"] .nd:not(.hd):not(.dm), section.a-flow[data-step="10"] .f-prog, section.a-flow[data-step="10"] .f-base { opacity: .3; transition-delay: .6s; }
+.a-flow .f-title, .a-flow .f-sum { position: absolute; left: 160px; top: 250px; font-size: 110px; font-weight: 820; letter-spacing: -.03em; line-height: 1.1; white-space: nowrap; }
+.a-flow .f-task { position: absolute; left: 162px; top: 410px; font-size: 56px; font-weight: 550; letter-spacing: -.01em; line-height: 1.3; color: var(--mute); white-space: nowrap; }
+.a-flow .f-flag { position: absolute; left: 0; top: 0; transform-origin: 0 0; transition: transform .95s var(--ease-move), opacity .5s; }
+section.a-flow .f-flag { transform: translate(860px, 460px); }
+section.a-flow[data-step="0"] .f-flag { transform: translate(115px, 720px) scale(.75); }
+section.a-flow[data-step="10"] .f-flag { transform: translate(1804.6px, 720px) scale(.75); opacity: .35; transition: transform .95s var(--ease-move), opacity .5s .6s; }
+.a-flow .pole { position: absolute; left: -2px; top: -204px; width: 4px; height: 199px; background: #fff; }
+.a-flow .f-card { position: absolute; left: -2px; top: -204px; padding: 16px 30px 18px; background: #fff; color: #000;
+  font-size: 54px; font-weight: 750; letter-spacing: -.02em; line-height: 1.1; white-space: nowrap;
+  transition: background-color .5s var(--ease-out) .7s, color .5s var(--ease-out) .7s, transform .95s var(--ease-move); }
+.a-flow.st-9 .f-card { background: var(--ai); color: #fff; }
+/* 결론: 깃발이 끝점에 서면 카드는 깃대 왼쪽으로 건다(화면 밖으로 나가지 않게) */
+section.a-flow[data-step="10"] .f-card { transform: translateX(calc(-100% + 4px)); }
+

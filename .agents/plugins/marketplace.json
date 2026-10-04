@@ -1,0 +1,20 @@
+{
+  "name": "motion-graphic",
+  "interface": {
+    "displayName": "motion-graphic (Codex)"
+  },
+  "plugins": [
+    {
+      "name": "motion-graphic",
+      "source": {
+        "source": "local",
+        "path": "./plugins/motion-graphic"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

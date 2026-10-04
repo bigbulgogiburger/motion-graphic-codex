@@ -1,0 +1,44 @@
+/* ═════════════ 샘플 flow — 문의 하나가 끝나기까지(노선도 위 티켓) ═════════════ */
+.c-route .q-title, .c-route .q-sum { position: absolute; left: 114px; top: 226px; font-size: 120px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; white-space: nowrap; }
+.c-route .q-track, .c-route .q-prog { position: absolute; left: 200px; top: 643px; width: 1520px; height: 14px; background: var(--device); transition: background-color .6s var(--e-move); }
+.c-route .q-prog { background: var(--ai); transform-origin: 0 50%; transform: scaleX(0); transition: transform .55s var(--e-move), background-color .6s var(--e-move); }
+.c-route[data-step="2"] .q-prog { transform: scaleX(.125); }
+.c-route[data-step="3"] .q-prog { transform: scaleX(.25); }
+.c-route[data-step="4"] .q-prog { transform: scaleX(.375); }
+.c-route[data-step="5"] .q-prog { transform: scaleX(.5); transition-delay: .26s, 0s; }
+.c-route[data-step="6"] .q-prog { transform: scaleX(.625); }
+.c-route[data-step="7"] .q-prog { transform: scaleX(.75); }
+.c-route[data-step="8"] .q-prog { transform: scaleX(.875); }
+.c-route[data-step="9"] .q-prog { transform: scaleX(1); transition-delay: .26s, 0s; }
+.c-route[data-step="10"] .q-prog { transform: scaleX(1); }
+.c-route .q-st { position: absolute; left: var(--x); top: 650px; width: 0; height: 0; }
+.c-route .q-sh { position: absolute; transition: background-color .6s var(--e-move); }
+.c-route .q-sh.dia { width: 59.4px; height: 59.4px; left: -29.7px; top: -29.7px; }
+.c-route .q-sh.dia.big { width: 82px; height: 82px; left: -41px; top: -41px; }
+.c-route .q-sh.dot { width: 66px; height: 66px; left: -33px; top: -33px; }
+.c-route .q-sh.sq { width: 62px; height: 62px; left: -31px; top: -31px; }
+.c-route .q-sh.duo { width: 108px; height: 66px; left: -54px; top: -33px; }
+.c-route .q-sh.duo b { position: absolute; top: 0; width: 66px; height: 66px; border-radius: 50%; transition: background-color .6s var(--e-move); }
+.c-route .q-sh.duo b:first-child { left: 0; background: var(--ai); }
+.c-route .q-sh.duo b:last-child { left: 42px; background: var(--ai2); outline: 6px solid var(--paper); }
+/* 승인 대기: ◆ 둘레의 주황 테(움직이지 않고 머문다) — 승인되면 사라진다 */
+.c-route .q-ring { width: 112px; height: 112px; left: -56px; top: -56px; background: transparent; border: 6px solid var(--human); opacity: 0; transition: opacity .25s var(--e-exit); }
+.c-route[data-step="4"] .ap1 .q-ring, .c-route[data-step="8"] .ap2 .q-ring { opacity: 1; transition: none; }
+.c-route .q-chk { position: absolute; left: -60px; top: -60px; overflow: visible; pointer-events: none; }
+.c-route .q-chk path { fill: none; stroke: var(--ink); stroke-width: 10px; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.c-route.st-5 .ap1 .q-chk path, .c-route.st-9 .ap2 .q-chk path { stroke-dashoffset: 0; }
+/* 관문 차단봉(14px 선): 관문에 선 티켓의 바로 앞(오른쪽)에 위에서 내려와 길을 막는다 — 티켓 글자와 겹치지 않게 x = 관문 + 116 */
+.c-route .q-bar { position: absolute; left: 116px; top: -206px; width: 14px; height: 196px; border-radius: 7px; background: var(--device); transform-origin: 50% 0; transform: scaleY(0); }
+.c-route .q-lb { position: absolute; left: -160px; top: 84px; width: 320px; text-align: center; font-size: 44px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; white-space: nowrap; transition: color .6s var(--e-move); }
+.c-route .q-tk-pos { position: absolute; left: 0; top: 0; }
+.c-route .q-ticket { display: inline-block; padding: 8px 26px 11px; border: 5px solid var(--ink); border-radius: 13px; background: var(--paper); color: var(--ink); font-size: 44px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; white-space: nowrap;
+  transition: background-color .3s, color .3s, border-color .3s; }
+.c-route.st-9 .q-ticket { background: var(--ink); color: var(--paper); transition-delay: .81s; }
+.c-route .q-cap-pos { position: absolute; top: 290px; left: 128px; }
+.c-route .q-cap { font-size: 60px; font-weight: 650; letter-spacing: -.015em; line-height: 1.25; white-space: nowrap; }
+/* 결론: ◆ 셋만 색을 지키고 나머지는 회색으로 물러난다(이름은 읽히게 #666) */
+.c-route.st-10 .q-track, .c-route.st-10 .q-prog,
+.c-route.st-10 .q-fade .q-sh:not(.duo), .c-route.st-10 .q-fade .q-sh b { background: var(--mute); }
+.c-route.st-10 .q-fade .q-lb { color: var(--ink3); }
+.c-route.st-10 .q-ticket { background: var(--ink3); border-color: var(--ink3); transition-delay: 0s; transition-duration: .6s; }
+

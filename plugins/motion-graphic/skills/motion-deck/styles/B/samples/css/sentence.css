@@ -1,0 +1,13 @@
+/* 샘플 sentence — 교정 원고: 자리바꿈 부호 → 낱말이 자리를 바꾸고, 지운 말 위에 새 말을 넣고, 여백 주석이 붙는다 */
+.b-s12 .s12 {
+  font-size: 150px; font-weight: 800; letter-spacing: -.03em; line-height: 1.16;
+  color: var(--ink); white-space: nowrap; --pen-w: 11px;
+}
+.b-s12 .s12 .ai { color: var(--green); }
+.b-s12 .s12 .lk { letter-spacing: -.015em; }     /* AI가: I → 가 경계 보정 */
+/* 여백의 자리바꿈 부호(정적 SVG)는 지면 위 잉크, 활자는 그 위 — 비켜 가는 낱말이 부호를 덮고 지나간다 */
+.b-s12 .flip { z-index: 1; }
+.b-s12 .s12-note {
+  position: absolute; left: 994px; top: 234px;
+  font-size: 84px; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; color: var(--ink);
+}
